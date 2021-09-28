@@ -13,6 +13,6 @@ export class WeatherService {
   constructor(private http: HttpClient) {}
 
   getWeatherByZipCode(zipCode: string): Observable<Weather> {
-    return this.http.get<Weather>(this.endpointUrl, { params: { zip: zipCode } });
+    return this.http.get<Weather>(this.endpointUrl, { params: { zip: zipCode, units: 'metric' } });
   }
 }

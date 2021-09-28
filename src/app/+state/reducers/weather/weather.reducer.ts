@@ -22,6 +22,14 @@ const reducer = createReducer(
         [zipCode]: weather,
       },
     };
+  }),
+  on(WEATHER_ACTIONS.removeWeatherLocation, (state: WeatherState, { zipCode }) => {
+    const data = { ...state.data };
+    delete data[zipCode];
+    return {
+      ...state,
+      data,
+    };
   })
 );
 

@@ -3,14 +3,12 @@ export interface Weather {
     lon: number;
     lat: number;
   };
-  weather: [
-    {
-      id: number;
-      main: string;
-      description: string;
-      icon: string;
-    }
-  ];
+  weather: {
+    id: number;
+    main: string;
+    description: string;
+    icon: string;
+  }[];
   base: string;
   main: {
     temp: number;

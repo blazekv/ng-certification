@@ -7,5 +7,9 @@ export const WEATHER_ACTIONS = {
     '[Weather] Add Location Success',
     props<{ zipCode: string; weather: Weather }>()
   ),
-  addWeatherLocationFailure: createAction('[Weather] Add Location Failure', props<{ error: any }>()),
+  addWeatherLocationFailure: createAction(
+    '[Weather] Add Location Failure',
+    props<{ error: any }>()
+  ),
+  removeWeatherLocation: createAction('[Weather] Remove Location', props<{ zipCode: string }>()),
 };

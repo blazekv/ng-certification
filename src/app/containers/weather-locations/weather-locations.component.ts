@@ -5,6 +5,7 @@ import { WEATHER_ACTIONS } from '../../+state/actions/weather/weather.actions';
 import { Observable } from 'rxjs';
 import { WEATHER_SELECTORS } from '../../+state/selectors/weather.selectors';
 import { Weather } from '../../model/weather';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-weather-locations',
@@ -12,7 +13,12 @@ import { Weather } from '../../model/weather';
   styleUrls: ['./weather-locations.component.scss'],
 })
 export class WeatherLocationsComponent implements OnInit {
-  weatherLocations$: Observable<Weather[]> = this.store.select(WEATHER_SELECTORS.weatherLocations);
+  weatherLocations$: Observable<Map<string, Weather>> = this.store
+    .select(WEATHER_SELECTORS.weatherLocations)
+    .pipe(
+      filter(data => !!data),
+      map(data => new Map(Object.entries(data)))
+    );
 
   constructor(private store: Store<CoreModuleState>) {}
 
@@ -20,5 +26,9 @@ export class WeatherLocationsComponent implements OnInit {
 
   onAddLocation(zipCode: string) {
     this.store.dispatch(WEATHER_ACTIONS.addWeatherLocation({ zipCode }));
+  }
+
+  onRemoveLocation(zipCode: string) {
+    this.store.dispatch(WEATHER_ACTIONS.removeWeatherLocation({ zipCode }));
   }
 }

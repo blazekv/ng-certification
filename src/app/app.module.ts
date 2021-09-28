@@ -25,6 +25,8 @@ import { AppKeyInterceptor } from './interceptors/app-key.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { MessageEffects } from './+state/effects/message/message.effects';
 import { WeatherEffects } from './+state/effects/weather/weather.effects';
+import { CurrentWeatherComponent } from './components/current-weather/current-weather.component';
+import { IconPipe } from './pipes/icon.pipe';
 
 export function storageSyncReducer(reducer: ActionReducer<any>) {
   return storageMetaReducer<any>({
@@ -40,7 +42,13 @@ export function storageSyncReducer(reducer: ActionReducer<any>) {
 const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
 
 @NgModule({
-  declarations: [AppComponent, WeatherLocationsComponent, AddLocationComponent],
+  declarations: [
+    AppComponent,
+    WeatherLocationsComponent,
+    AddLocationComponent,
+    CurrentWeatherComponent,
+    IconPipe,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

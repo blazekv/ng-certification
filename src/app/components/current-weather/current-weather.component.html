@@ -1,0 +1,26 @@
+<mat-card *ngIf="weather">
+  <mat-card-title>{{ weather.name }}</mat-card-title>
+  <img
+    mat-card-image
+    *ngIf="weather.weather.length > 0"
+    src="https://www.angulartraining.com/images/weather/{{ weather.weather[0].icon | icon }}.png"
+    alt="Photo of a Shiba Inu"
+  />
+  <mat-card-content>
+    <strong>Current conditions: </strong>
+    <ng-container *ngIf="weather.weather.length > 0">{{ weather.weather[0].main }}</ng-container>
+
+    <br />
+    <strong>Temperature:</strong> {{ weather.main.temp }} °C<br />
+    <ng-container *ngIf="weather.main.temp_max !== undefined">
+      <strong>Max today:</strong> {{ weather.main.temp_max }} °C
+    </ng-container>
+    <ng-container *ngIf="weather.main.temp_min !== undefined">
+      - <strong>Min today:</strong> {{ weather.main.temp_min }} °C
+    </ng-container>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="warn" (click)="remove.emit()">Remove</button>
+  </mat-card-actions>
+</mat-card>

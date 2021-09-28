@@ -1,5 +1,8 @@
 <app-add-location (addLocation)="onAddLocation($event)"></app-add-location>
 
-<div *ngFor="let weather of weatherLocations$ | async">
-  {{ weather | json }}
-</div>
+<app-current-weather
+  *ngFor="let item of (weatherLocations$ | async)! | keyvalue"
+  [weather]="item.value"
+  (remove)="onRemoveLocation(item.key)"
+>
+</app-current-weather>
