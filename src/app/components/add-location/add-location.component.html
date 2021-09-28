@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-title>Add a location</mat-card-title>
+  <form [formGroup]="form" (ngSubmit)="submitLocation()">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter ZIP code</mat-label>
+      <input matInput formControlName="zipCode" placeholder="ZIP code" />
+    </mat-form-field>
+    <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Add location</button>
+  </form>
+</mat-card>

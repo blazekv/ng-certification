@@ -9,9 +9,17 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { WeatherLocationsComponent } from './containers/weather-locations/weather-locations.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { AddLocationComponent } from './components/add-location/add-location.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, WeatherLocationsComponent, AddLocationComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -20,6 +28,12 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
+    MatToolbarModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
