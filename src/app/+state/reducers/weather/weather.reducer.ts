@@ -1,10 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { WEATHER_ACTIONS } from '../../actions/weather/weather.actions';
+import { Weather } from '../../../model/weather';
 
 export const weatherFeatureKey = 'weather';
 
 export interface WeatherState {
-  data: { [index: string]: string };
+  data: { [index: string]: Weather };
 }
 
 export const weatherInitialState: WeatherState = {
@@ -13,12 +14,12 @@ export const weatherInitialState: WeatherState = {
 
 const reducer = createReducer(
   weatherInitialState,
-  on(WEATHER_ACTIONS.addLocation, (state: WeatherState, { zipCode }) => {
+  on(WEATHER_ACTIONS.addWeatherLocationSuccess, (state: WeatherState, { zipCode, weather }) => {
     return {
       ...state,
       data: {
         ...state.data,
-        [zipCode]: zipCode,
+        [zipCode]: weather,
       },
     };
   })

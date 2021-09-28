@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { WEATHER_ACTIONS } from '../../+state/actions/weather/weather.actions';
 import { Observable } from 'rxjs';
 import { WEATHER_SELECTORS } from '../../+state/selectors/weather.selectors';
+import { Weather } from '../../model/weather';
 
 @Component({
   selector: 'app-weather-locations',
@@ -11,13 +12,13 @@ import { WEATHER_SELECTORS } from '../../+state/selectors/weather.selectors';
   styleUrls: ['./weather-locations.component.scss'],
 })
 export class WeatherLocationsComponent implements OnInit {
-  zipCodes$: Observable<string[]> = this.store.select(WEATHER_SELECTORS.zipCodes);
+  weatherLocations$: Observable<Weather[]> = this.store.select(WEATHER_SELECTORS.weatherLocations);
 
   constructor(private store: Store<CoreModuleState>) {}
 
   ngOnInit(): void {}
 
   onAddLocation(zipCode: string) {
-    this.store.dispatch(WEATHER_ACTIONS.addLocation({ zipCode }));
+    this.store.dispatch(WEATHER_ACTIONS.addWeatherLocation({ zipCode }));
   }
 }
