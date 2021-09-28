@@ -1,1 +1,5 @@
 <app-add-location (addLocation)="onAddLocation($event)"></app-add-location>
+
+<div *ngFor="let zipCode of zipCodes$ | async">
+  {{ zipCode }}
+</div>
