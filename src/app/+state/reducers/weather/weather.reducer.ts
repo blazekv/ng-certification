@@ -1,15 +1,22 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { WEATHER_ACTIONS } from '../../actions/weather/weather.actions';
 import { Weather } from '../../../model/weather';
+import { Forecast } from '../../../model/forecast';
 
 export const weatherFeatureKey = 'weather';
 
 export interface WeatherState {
   data: { [index: string]: Weather };
+  selectedForecast?: {
+    zipCode: string;
+    forecast: Forecast;
+  };
+  forecastLoadingFinished: boolean;
 }
 
 export const weatherInitialState: WeatherState = {
   data: {},
+  forecastLoadingFinished: false,
 };
 
 const reducer = createReducer(
@@ -29,6 +36,28 @@ const reducer = createReducer(
     return {
       ...state,
       data,
+    };
+  }),
+  on(WEATHER_ACTIONS.loadForecast, (state: WeatherState) => {
+    return {
+      ...state,
+      forecastLoadingFinished: false,
+    };
+  }),
+  on(WEATHER_ACTIONS.loadForecastSuccess, (state: WeatherState, { zipCode, forecast }) => {
+    return {
+      ...state,
+      selectedForecast: {
+        zipCode,
+        forecast,
+      },
+      forecastLoadingFinished: true,
+    };
+  }),
+  on(WEATHER_ACTIONS.loadForecastFailure, (state: WeatherState) => {
+    return {
+      ...state,
+      forecastLoadingFinished: true,
     };
   })
 );

@@ -1,14 +1,9 @@
 <mat-card *ngIf="weather">
   <mat-card-title>{{ weather.name }}</mat-card-title>
-  <img
-    mat-card-image
-    *ngIf="weather.weather.length > 0"
-    src="https://www.angulartraining.com/images/weather/{{ weather.weather[0].icon | icon }}.png"
-    alt="Photo of a Shiba Inu"
-  />
+
   <mat-card-content>
     <strong>Current conditions: </strong>
-    <ng-container *ngIf="weather.weather.length > 0">{{ weather.weather[0].main }}</ng-container>
+    <app-weather-condition [weather]="weather.weather"></app-weather-condition>
 
     <br />
     <strong>Temperature:</strong> {{ weather.main.temp }} °C<br />
@@ -21,6 +16,7 @@
   </mat-card-content>
 
   <mat-card-actions>
+    <a mat-raised-button color="primary" [routerLink]="['/forecast', zipCode]">Forecast</a>
     <button mat-raised-button color="warn" (click)="remove.emit()">Remove</button>
   </mat-card-actions>
 </mat-card>

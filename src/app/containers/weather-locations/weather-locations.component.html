@@ -3,6 +3,7 @@
 <app-current-weather
   *ngFor="let item of (weatherLocations$ | async)! | keyvalue"
   [weather]="item.value"
+  [zipCode]="item.key"
   (remove)="onRemoveLocation(item.key)"
 >
 </app-current-weather>

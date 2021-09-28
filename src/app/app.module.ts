@@ -27,6 +27,12 @@ import { MessageEffects } from './+state/effects/message/message.effects';
 import { WeatherEffects } from './+state/effects/weather/weather.effects';
 import { CurrentWeatherComponent } from './components/current-weather/current-weather.component';
 import { IconPipe } from './pipes/icon.pipe';
+import { ForecastComponent } from './containers/forecast/forecast.component';
+import { LocationForecastComponent } from './components/location-forecast/location-forecast.component';
+import { MatTableModule } from '@angular/material/table';
+import { WeatherConditionComponent } from './components/weather-condition/weather-condition.component';
+import { WeatherIconComponent } from './components/weather-icon/weather-icon.component';
+import { NotFoundComponent } from './containers/not-found/not-found.component';
 
 export function storageSyncReducer(reducer: ActionReducer<any>) {
   return storageMetaReducer<any>({
@@ -48,6 +54,11 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     AddLocationComponent,
     CurrentWeatherComponent,
     IconPipe,
+    ForecastComponent,
+    LocationForecastComponent,
+    WeatherConditionComponent,
+    WeatherIconComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +76,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatTableModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AppKeyInterceptor, multi: true }],
   bootstrap: [AppComponent],

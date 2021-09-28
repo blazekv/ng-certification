@@ -16,6 +16,9 @@ import { Weather } from '../../model/weather';
 })
 export class CurrentWeatherComponent implements OnInit {
   @Input()
+  zipCode: string = '';
+
+  @Input()
   weather?: Weather;
 
   @Output()

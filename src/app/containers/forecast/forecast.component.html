@@ -1,0 +1,6 @@
+<a mat-raised-button color="primary" [routerLink]="['/']">Back</a>
+
+<ng-container *ngIf="forecast$ | async as forecast">
+  <app-location-forecast [forecast]="forecast" [zipCode]="zipCode$ | async">
+  </app-location-forecast>
+</ng-container>
