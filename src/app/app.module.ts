@@ -19,9 +19,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { coreReducers } from './+state/reducers';
 import { storageMetaReducer } from './storage.metareducer';
-import { WeatherEffects } from './+state/effects/weather.effects';
+
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppKeyInterceptor } from './interceptors/app-key.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { MessageEffects } from './+state/effects/message/message.effects';
+import { WeatherEffects } from './+state/effects/weather/weather.effects';
 
 export function storageSyncReducer(reducer: ActionReducer<any>) {
   return storageMetaReducer<any>({
@@ -44,8 +47,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     BrowserAnimationsModule,
     StoreModule.forRoot(coreReducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([WeatherEffects]),
+    EffectsModule.forRoot([WeatherEffects, MessageEffects]),
     StoreRouterConnectingModule.forRoot(),
+    ToastrModule.forRoot(),
     HttpClientModule,
     MatToolbarModule,
     MatCardModule,
