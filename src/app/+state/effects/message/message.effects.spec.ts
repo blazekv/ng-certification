@@ -3,6 +3,8 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
 import { MessageEffects } from './message.effects';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ToastrModule } from 'ngx-toastr';
 
 describe('MessageEffects', () => {
   let actions$: Observable<any>;
@@ -10,6 +12,7 @@ describe('MessageEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, ToastrModule.forRoot()],
       providers: [MessageEffects, provideMockActions(() => actions$)],
     });
 

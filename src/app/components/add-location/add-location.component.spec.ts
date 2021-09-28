@@ -31,4 +31,12 @@ describe('AddLocationComponent', () => {
     component.submitLocation();
     expect(spy).toHaveBeenCalledWith(zipCode);
   });
+
+  it('should not emit addLocation if form is invalid', () => {
+    const zipCode = '160';
+    const spy = spyOn(component.addLocation, 'emit');
+    component.form.patchValue({ zipCode });
+    component.submitLocation();
+    expect(spy).not.toHaveBeenCalledWith(zipCode);
+  });
 });

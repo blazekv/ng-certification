@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ForecastComponent } from './forecast.component';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('ForecastComponent', () => {
   let component: ForecastComponent;
@@ -9,6 +10,13 @@ describe('ForecastComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ForecastComponent],
+      providers: [
+        provideMockStore({
+          initialState: {
+            weather: {},
+          },
+        }),
+      ],
     }).compileComponents();
   });
 

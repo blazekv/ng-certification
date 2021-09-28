@@ -3,6 +3,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
 import { WeatherEffects } from './weather.effects';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('WeatherEffects', () => {
   let actions$: Observable<any>;
@@ -10,6 +11,7 @@ describe('WeatherEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [WeatherEffects, provideMockActions(() => actions$)],
     });
 

@@ -11,7 +11,7 @@ import { CoreModuleState } from '../reducers';
 import { Store } from '@ngrx/store';
 import { WEATHER_ACTIONS } from '../actions/weather/weather.actions';
 import { WEATHER_SELECTORS } from '../selectors/weather.selectors';
-import { filter, map, mapTo, withLatestFrom } from 'rxjs/operators';
+import { filter, map, mapTo, take, withLatestFrom } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -33,13 +33,13 @@ export class ForecastLoadedGuard implements CanActivate {
       withLatestFrom(this.store.select(WEATHER_SELECTORS.selectedForecastZipCode)),
       filter(([finished]) => finished),
       map(([, storedZipCode]) => {
-        console.log('test', storedZipCode);
         if (storedZipCode === zipCode) {
           return true;
         } else {
           return this.router.createUrlTree(['/404']);
         }
-      })
+      }),
+      take(1)
     );
   }
 }
