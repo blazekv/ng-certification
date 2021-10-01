@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href https://blazekv.github.io/ng-certification/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy": "ngh --dir dist/WeatherForecast --no-silent --repo=https://github.com/blazekv/ng-certification.git"
   },
   "private": true,
   "dependencies": {
