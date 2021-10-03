@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WeatherIconComponent } from './weather-icon.component';
+import { IconPipe } from '../../pipes/icon.pipe';
 
 describe('WeatherIconComponent', () => {
   let component: WeatherIconComponent;
@@ -8,7 +9,7 @@ describe('WeatherIconComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [WeatherIconComponent],
+      declarations: [WeatherIconComponent, IconPipe],
     }).compileComponents();
   });
 
