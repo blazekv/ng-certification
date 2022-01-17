@@ -2,6 +2,7 @@
   <mat-card-title>{{ weather.name }}</mat-card-title>
 
   <mat-card-content>
+    <strong>Last update:</strong> {{ weather.lastUpdate | date: 'HH:mm:ss' }}<br />
     <strong>Current conditions: </strong>
     <app-weather-condition [weather]="weather.weather"></app-weather-condition>
 

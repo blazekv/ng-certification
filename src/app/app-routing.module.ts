@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WeatherLocationsComponent } from './containers/weather-locations/weather-locations.component';
 import { ForecastComponent } from './containers/forecast/forecast.component';
-import { ForecastLoadedGuard } from './+state/guards/forecast-loaded.guard';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
+import { ForecastLoadedGuard } from './guards/forecast-loaded.guard';
 
 const routes: Routes = [
   {

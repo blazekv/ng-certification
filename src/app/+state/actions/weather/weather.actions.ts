@@ -3,12 +3,16 @@ import { Weather } from '../../../model/weather';
 import { Forecast } from '../../../model/forecast';
 
 export const WEATHER_ACTIONS = {
-  addWeatherLocation: createAction('[Weather] Add Location', props<{ zipCode: string }>()),
-  addWeatherLocationSuccess: createAction(
+  reloadWeatherLocations: createAction(
+    '[Weather] Reload Locations',
+    props<{ zipCodes: string[] }>()
+  ),
+  updateWeatherLocation: createAction('[Weather] Add Location', props<{ zipCode: string }>()),
+  updateWeatherLocationSuccess: createAction(
     '[Weather] Add Location Success',
     props<{ zipCode: string; weather: Weather }>()
   ),
-  addWeatherLocationFailure: createAction(
+  updateWeatherLocationFailure: createAction(
     '[Weather] Add Location Failure',
     props<{ error: any }>()
   ),

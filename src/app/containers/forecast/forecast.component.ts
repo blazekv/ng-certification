@@ -4,6 +4,7 @@ import { Forecast } from '../../model/forecast';
 import { CoreModuleState } from '../../+state/reducers';
 import { Store } from '@ngrx/store';
 import { WEATHER_SELECTORS } from '../../+state/selectors/weather.selectors';
+import { RefreshWeatherService } from '@services/refresh-weather.service';
 
 @Component({
   selector: 'app-forecast',

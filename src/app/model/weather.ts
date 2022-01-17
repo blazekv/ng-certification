@@ -36,6 +36,7 @@ export interface Weather {
   id: number;
   name: string;
   cod: number;
+  lastUpdate?: string;
 }
 
 export interface WeatherItem {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, flatMap, map, mergeMap, switchMap } from 'rxjs/operators';
 
 import { of } from 'rxjs';
 import { WeatherService } from '../../../services/weather.service';
@@ -16,21 +16,30 @@ export class WeatherEffects {
     private forecastService: ForecastService
   ) {}
 
-  addWeatherLocation$ = createEffect(() => {
+  reloadWeatherLocations$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(WEATHER_ACTIONS.addWeatherLocation),
-      switchMap(({ zipCode }) => {
+      ofType(WEATHER_ACTIONS.reloadWeatherLocations),
+      switchMap(({ zipCodes }) => {
+        return zipCodes.map(zipCode => WEATHER_ACTIONS.updateWeatherLocation({ zipCode }));
+      })
+    );
+  });
+
+  updateWeatherLocation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(WEATHER_ACTIONS.updateWeatherLocation),
+      mergeMap(({ zipCode }) => {
         return this.weatherService.getWeatherByZipCode(zipCode).pipe(
-          map(weather => WEATHER_ACTIONS.addWeatherLocationSuccess({ zipCode, weather })),
-          catchError((error: any) => of(WEATHER_ACTIONS.addWeatherLocationFailure({ error })))
+          map(weather => WEATHER_ACTIONS.updateWeatherLocationSuccess({ zipCode, weather })),
+          catchError((error: any) => of(WEATHER_ACTIONS.updateWeatherLocationFailure({ error })))
         );
       })
     );
   });
 
-  addWeatherLocationErrorMessage$ = createEffect(() => {
+  updateWeatherLocationErrorMessage$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(WEATHER_ACTIONS.addWeatherLocationFailure),
+      ofType(WEATHER_ACTIONS.updateWeatherLocationFailure),
       map(({ error }) => {
         const message =
           error.status === 404 ? 'Cannot find weather for this ZIP code' : error.message;

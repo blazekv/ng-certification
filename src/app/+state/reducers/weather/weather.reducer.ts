@@ -21,12 +21,12 @@ export const weatherInitialState: WeatherState = {
 
 const reducer = createReducer(
   weatherInitialState,
-  on(WEATHER_ACTIONS.addWeatherLocationSuccess, (state: WeatherState, { zipCode, weather }) => {
+  on(WEATHER_ACTIONS.updateWeatherLocationSuccess, (state: WeatherState, { zipCode, weather }) => {
     return {
       ...state,
       data: {
         ...state.data,
-        [zipCode]: weather,
+        [zipCode]: { ...weather, lastUpdate: new Date().toISOString() },
       },
     };
   }),

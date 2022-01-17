@@ -7,11 +7,11 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CoreModuleState } from '../reducers';
 import { Store } from '@ngrx/store';
-import { WEATHER_ACTIONS } from '../actions/weather/weather.actions';
-import { WEATHER_SELECTORS } from '../selectors/weather.selectors';
-import { filter, map, mapTo, take, withLatestFrom } from 'rxjs/operators';
+import { filter, map, take, withLatestFrom } from 'rxjs/operators';
+import { CoreModuleState } from '../+state/reducers';
+import { WEATHER_ACTIONS } from '../+state/actions/weather/weather.actions';
+import { WEATHER_SELECTORS } from '../+state/selectors/weather.selectors';
 
 @Injectable({
   providedIn: 'root',

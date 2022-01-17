@@ -6,7 +6,11 @@ import { Observable } from 'rxjs';
 import { WEATHER_SELECTORS } from '../../+state/selectors/weather.selectors';
 import { Weather } from '../../model/weather';
 import { filter, map } from 'rxjs/operators';
+import { RefreshWeatherService } from '@services/refresh-weather.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { environment } from '../../../environments/environment';
 
+@UntilDestroy()
 @Component({
   selector: 'app-weather-locations',
   templateUrl: './weather-locations.component.html',
@@ -20,12 +24,20 @@ export class WeatherLocationsComponent implements OnInit {
       map(data => new Map(Object.entries(data)))
     );
 
-  constructor(private store: Store<CoreModuleState>) {}
+  constructor(
+    private store: Store<CoreModuleState>,
+    private refreshWeatherService: RefreshWeatherService
+  ) {
+    this.refreshWeatherService
+      .startRefresh(environment.refreshInterval)
+      .pipe(untilDestroyed(this))
+      .subscribe();
+  }
 
   ngOnInit(): void {}
 
   onAddLocation(zipCode: string) {
-    this.store.dispatch(WEATHER_ACTIONS.addWeatherLocation({ zipCode }));
+    this.store.dispatch(WEATHER_ACTIONS.updateWeatherLocation({ zipCode }));
   }
 
   onRemoveLocation(zipCode: string) {
