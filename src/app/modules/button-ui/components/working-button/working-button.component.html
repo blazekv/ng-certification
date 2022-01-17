@@ -1,0 +1,31 @@
+<ng-container [ngSwitch]="state">
+  <ng-container *ngSwitchCase="ButtonState.INIT">
+    <ng-container *ngTemplateOutlet="initButton ? initButton : defaultInitButton"></ng-container>
+  </ng-container>
+  <ng-container *ngSwitchCase="ButtonState.PROCESSING">
+    <ng-container
+      *ngTemplateOutlet="processingButton ? processingButton : defaultProcessingButton"
+    ></ng-container>
+  </ng-container>
+  <ng-container *ngSwitchCase="ButtonState.SUCCESS">
+    <ng-container
+      *ngTemplateOutlet="successButton ? successButton : defaultDoneButton"
+    ></ng-container>
+  </ng-container>
+  <ng-container *ngSwitchCase="ButtonState.ERROR">
+    <ng-container *ngTemplateOutlet="errorButton ? errorButton : defaultErrorButton"></ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #defaultInitButton>
+  <button mat-raised-button color="primary">Save</button>
+</ng-template>
+<ng-template #defaultProcessingButton>
+  <button mat-raised-button color="primary" [disabled]="true">Processing...</button>
+</ng-template>
+<ng-template #defaultDoneButton>
+  <button mat-raised-button color="success">Done</button>
+</ng-template>
+<ng-template #defaultErrorButton>
+  <button mat-raised-button color="warn">Error</button>
+</ng-template>

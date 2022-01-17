@@ -18,6 +18,10 @@ export const WEATHER_SELECTORS = {
     getWeatherState,
     (entityState: WeatherState) => entityState.selectedForecast?.zipCode
   ),
+  forecastAdding: createSelector(
+    getWeatherState,
+    (entityState: WeatherState) => entityState.forecastAdding
+  ),
   forecastLoadingFinished: createSelector(
     getWeatherState,
     (entityState: WeatherState) => entityState.forecastLoadingFinished

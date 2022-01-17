@@ -1,4 +1,7 @@
-<app-add-location (addLocation)="onAddLocation($event)"></app-add-location>
+<app-add-location
+  [addingState$]="addingState$"
+  (addLocation)="onAddLocation($event)"
+></app-add-location>
 
 <app-current-weather
   *ngFor="let item of (weatherLocations$ | async)! | keyvalue"

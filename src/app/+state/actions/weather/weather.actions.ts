@@ -7,13 +7,22 @@ export const WEATHER_ACTIONS = {
     '[Weather] Reload Locations',
     props<{ zipCodes: string[] }>()
   ),
-  updateWeatherLocation: createAction('[Weather] Add Location', props<{ zipCode: string }>()),
-  updateWeatherLocationSuccess: createAction(
+  addWeatherLocation: createAction('[Weather] Add Location', props<{ zipCode: string }>()),
+  addWeatherLocationSuccess: createAction(
     '[Weather] Add Location Success',
     props<{ zipCode: string; weather: Weather }>()
   ),
-  updateWeatherLocationFailure: createAction(
+  addWeatherLocationFailure: createAction(
     '[Weather] Add Location Failure',
+    props<{ error: any }>()
+  ),
+  updateWeatherLocation: createAction('[Weather] Update Location', props<{ zipCode: string }>()),
+  updateWeatherLocationSuccess: createAction(
+    '[Weather] Update Location Success',
+    props<{ zipCode: string; weather: Weather }>()
+  ),
+  updateWeatherLocationFailure: createAction(
+    '[Weather] Update Location Failure',
     props<{ error: any }>()
   ),
   removeWeatherLocation: createAction('[Weather] Remove Location', props<{ zipCode: string }>()),

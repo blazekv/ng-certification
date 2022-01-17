@@ -1,5 +1,14 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { ButtonState } from '../../modules/button-ui/model/button-state';
 
 @Component({
   selector: 'app-add-location',
@@ -10,6 +19,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddLocationComponent implements OnInit {
   form: FormGroup;
 
+  @Input()
+  addingState$?: Observable<ButtonState>;
   @Output()
   addLocation: EventEmitter<string> = new EventEmitter<string>();
 

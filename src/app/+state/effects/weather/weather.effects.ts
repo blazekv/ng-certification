@@ -25,6 +25,18 @@ export class WeatherEffects {
     );
   });
 
+  addWeatherLocation$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(WEATHER_ACTIONS.addWeatherLocation),
+      mergeMap(({ zipCode }) => {
+        return this.weatherService.getWeatherByZipCode(zipCode).pipe(
+          map(weather => WEATHER_ACTIONS.addWeatherLocationSuccess({ zipCode, weather })),
+          catchError((error: any) => of(WEATHER_ACTIONS.addWeatherLocationFailure({ error })))
+        );
+      })
+    );
+  });
+
   updateWeatherLocation$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(WEATHER_ACTIONS.updateWeatherLocation),

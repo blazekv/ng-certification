@@ -33,6 +33,8 @@ import { MatTableModule } from '@angular/material/table';
 import { WeatherConditionComponent } from './components/weather-condition/weather-condition.component';
 import { WeatherIconComponent } from './components/weather-icon/weather-icon.component';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
+import { ButtonUiModule } from './modules/button-ui/button-ui.module';
+import { MatIconModule } from '@angular/material/icon';
 
 export function storageSyncReducer(reducer: ActionReducer<any>) {
   return storageMetaReducer<any>({
@@ -77,6 +79,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [storageSyncReducer];
     ReactiveFormsModule,
     MatButtonModule,
     MatTableModule,
+    ButtonUiModule,
+    MatIconModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AppKeyInterceptor, multi: true }],
   bootstrap: [AppComponent],

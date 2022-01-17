@@ -2,6 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { WEATHER_ACTIONS } from '../../actions/weather/weather.actions';
 import { Weather } from '../../../model/weather';
 import { Forecast } from '../../../model/forecast';
+import { RequestState } from '../../../model/request-state';
 
 export const weatherFeatureKey = 'weather';
 
@@ -12,15 +13,39 @@ export interface WeatherState {
     forecast: Forecast;
   };
   forecastLoadingFinished: boolean;
+  forecastAdding: RequestState;
 }
 
 export const weatherInitialState: WeatherState = {
   data: {},
   forecastLoadingFinished: false,
+  forecastAdding: RequestState.DEFAULT,
 };
 
 const reducer = createReducer(
   weatherInitialState,
+  on(WEATHER_ACTIONS.addWeatherLocation, (state: WeatherState) => {
+    return {
+      ...state,
+      forecastAdding: RequestState.PROCESSING,
+    };
+  }),
+  on(WEATHER_ACTIONS.addWeatherLocationSuccess, (state: WeatherState, { zipCode, weather }) => {
+    return {
+      ...state,
+      data: {
+        ...state.data,
+        [zipCode]: { ...weather, lastUpdate: new Date().toISOString() },
+      },
+      forecastAdding: RequestState.SUCCESS,
+    };
+  }),
+  on(WEATHER_ACTIONS.addWeatherLocationFailure, (state: WeatherState) => {
+    return {
+      ...state,
+      forecastAdding: RequestState.ERROR,
+    };
+  }),
   on(WEATHER_ACTIONS.updateWeatherLocationSuccess, (state: WeatherState, { zipCode, weather }) => {
     return {
       ...state,

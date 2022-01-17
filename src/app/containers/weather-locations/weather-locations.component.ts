@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { CoreModuleState } from '../../+state/reducers';
 import { Store } from '@ngrx/store';
 import { WEATHER_ACTIONS } from '../../+state/actions/weather/weather.actions';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { WEATHER_SELECTORS } from '../../+state/selectors/weather.selectors';
 import { Weather } from '../../model/weather';
 import { filter, map } from 'rxjs/operators';
 import { RefreshWeatherService } from '@services/refresh-weather.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { environment } from '../../../environments/environment';
+import { ButtonState } from '../../modules/button-ui/model/button-state';
+import { toButtonState } from '../../model/request-state';
 
 @UntilDestroy()
 @Component({
@@ -24,6 +26,10 @@ export class WeatherLocationsComponent implements OnInit {
       map(data => new Map(Object.entries(data)))
     );
 
+  addingState$: Observable<ButtonState> = this.store
+    .select(WEATHER_SELECTORS.forecastAdding)
+    .pipe(map(requestState => toButtonState(requestState)));
+
   constructor(
     private store: Store<CoreModuleState>,
     private refreshWeatherService: RefreshWeatherService
@@ -37,7 +43,7 @@ export class WeatherLocationsComponent implements OnInit {
   ngOnInit(): void {}
 
   onAddLocation(zipCode: string) {
-    this.store.dispatch(WEATHER_ACTIONS.updateWeatherLocation({ zipCode }));
+    this.store.dispatch(WEATHER_ACTIONS.addWeatherLocation({ zipCode }));
   }
 
   onRemoveLocation(zipCode: string) {
