@@ -9,8 +9,11 @@ import { filter, map } from 'rxjs/operators';
 import { RefreshWeatherService } from '@services/refresh-weather.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { environment } from '../../../environments/environment';
-import { ButtonState } from '../../modules/button-ui/model/button-state';
 import { toButtonState } from '../../model/request-state';
+import { ButtonState } from '../../modules/basic-ui/model/button-state';
+import { COUNTRY_SELECTORS } from '../../+state/selectors/country.selectors';
+import { Country } from '../../model/country';
+import { ForecastParameters } from '../../model/forecast-parameters';
 
 @UntilDestroy()
 @Component({
@@ -29,6 +32,8 @@ export class WeatherLocationsComponent implements OnInit {
   addingState$: Observable<ButtonState> = this.store
     .select(WEATHER_SELECTORS.forecastAdding)
     .pipe(map(requestState => toButtonState(requestState)));
+
+  countries$: Observable<Country[]> = this.store.select(COUNTRY_SELECTORS.countries);
 
   constructor(
     private store: Store<CoreModuleState>,

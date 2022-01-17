@@ -1,0 +1,18 @@
+.autocomplete {
+  position: absolute;
+  border: 1px solid #cccccc;
+  max-height: 300px;
+  overflow-y: auto;
+  min-width: 200px;
+  z-index: 10;
+  background-color: white;
+
+  > * {
+    padding: 1em;
+  }
+
+  > .item:hover {
+    background-color: #7f7f7f;
+    cursor: pointer;
+  }
+}

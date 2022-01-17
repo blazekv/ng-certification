@@ -4,11 +4,13 @@ import { WeatherLocationsComponent } from './containers/weather-locations/weathe
 import { ForecastComponent } from './containers/forecast/forecast.component';
 import { NotFoundComponent } from './containers/not-found/not-found.component';
 import { ForecastLoadedGuard } from './guards/forecast-loaded.guard';
+import { CountriesLoadedGuard } from './guards/countries-loaded.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: WeatherLocationsComponent,
+    canActivate: [CountriesLoadedGuard],
   },
   {
     path: 'forecast/:zipcode',

@@ -1,4 +1,4 @@
-import { ButtonState } from '../modules/button-ui/model/button-state';
+import { ButtonState } from '../modules/basic-ui/model/button-state';
 
 export enum RequestState {
   DEFAULT,

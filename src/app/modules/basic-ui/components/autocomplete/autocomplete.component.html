@@ -1,0 +1,24 @@
+<mat-form-field [formGroup]="form" appearance="fill">
+  <mat-label *ngIf="label">{{ label }}</mat-label>
+  <input
+    matInput
+    formControlName="search"
+    autocomplete="off"
+    (click)="enableAutocomplete()"
+    (blur)="hideWithDelay()"
+  />
+</mat-form-field>
+
+<div class="autocomplete" *ngIf="showAutocomplete">
+  <ng-container *ngIf="filteredItems && filteredItems.length > 0; else notFound">
+    <div class="item" *ngFor="let item of filteredItems" (click)="fill(item)">
+      <span>{{ item.prefix }}</span
+      ><strong>{{ item.searched }}</strong
+      ><span>{{ item.suffix }}</span>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #notFound>
+  <div>No items found</div>
+</ng-template>

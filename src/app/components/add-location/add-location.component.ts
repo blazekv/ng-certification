@@ -8,7 +8,8 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { ButtonState } from '../../modules/button-ui/model/button-state';
+import { ButtonState } from '../../modules/basic-ui/model/button-state';
+import { Country } from '../../model/country';
 
 @Component({
   selector: 'app-add-location',
@@ -19,6 +20,8 @@ import { ButtonState } from '../../modules/button-ui/model/button-state';
 export class AddLocationComponent implements OnInit {
   form: FormGroup;
 
+  @Input()
+  countries: Country[] | null = [];
   @Input()
   addingState$?: Observable<ButtonState>;
   @Output()
@@ -32,13 +35,15 @@ export class AddLocationComponent implements OnInit {
 
   submitLocation() {
     if (this.form.valid) {
-      this.addLocation.emit(this.form.value.zipCode);
+      const zipCode = `${this.form.value.zipCode},${this.form.value.countryCode}`;
+      this.addLocation.emit(zipCode);
     }
   }
 
   private createForm() {
     return this.fb.group({
-      zipCode: ['', [Validators.required, Validators.minLength(5)]],
+      zipCode: ['', [Validators.required, Validators.minLength(4)]],
+      countryCode: ['', [Validators.required]],
     });
   }
 }

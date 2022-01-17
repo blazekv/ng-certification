@@ -5,6 +5,12 @@
       <mat-label>Enter ZIP code</mat-label>
       <input matInput formControlName="zipCode" placeholder="ZIP code" />
     </mat-form-field>
+    <app-autocomplete
+      formControlName="countryCode"
+      label="Country *"
+      valueKey="code"
+      [items]="countries"
+    ></app-autocomplete>
 
     <app-working-button
       [state$]="addingState$"
