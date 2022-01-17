@@ -17,7 +17,7 @@ import { COUNTRY_SELECTORS } from '../+state/selectors/country.selectors';
   providedIn: 'root',
 })
 export class CountriesLoadedGuard implements CanActivate {
-  constructor(private store: Store<CoreModuleState>, private router: Router) {}
+  constructor(private store: Store<CoreModuleState>) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

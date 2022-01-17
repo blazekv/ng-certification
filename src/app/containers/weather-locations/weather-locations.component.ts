@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { CoreModuleState } from '../../+state/reducers';
 import { Store } from '@ngrx/store';
 import { WEATHER_ACTIONS } from '../../+state/actions/weather/weather.actions';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { WEATHER_SELECTORS } from '../../+state/selectors/weather.selectors';
 import { Weather } from '../../model/weather';
 import { filter, map } from 'rxjs/operators';
-import { RefreshWeatherService } from '@services/refresh-weather.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { environment } from '../../../environments/environment';
 import { toButtonState } from '../../model/request-state';
 import { ButtonState } from '../../modules/basic-ui/model/button-state';
 import { COUNTRY_SELECTORS } from '../../+state/selectors/country.selectors';
 import { Country } from '../../model/country';
-import { ForecastParameters } from '../../model/forecast-parameters';
+import { RefreshWeatherService } from '../../services/refresh-weather.service';
 
 @UntilDestroy()
 @Component({

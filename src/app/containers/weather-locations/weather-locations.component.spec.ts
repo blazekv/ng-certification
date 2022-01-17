@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { WeatherConditionComponent } from '../../components/weather-condition/weather-condition.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { BasicUiModule } from '../../modules/basic-ui/basic-ui.module';
 
 describe('WeatherLocationsComponent', () => {
   let component: WeatherLocationsComponent;
@@ -34,6 +35,7 @@ describe('WeatherLocationsComponent', () => {
         ReactiveFormsModule,
         RouterTestingModule,
         NoopAnimationsModule,
+        BasicUiModule,
       ],
       providers: [
         provideMockStore({
