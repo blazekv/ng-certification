@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { provideMockActions } from '@ngrx/effects/testing';
+
 import { Observable } from 'rxjs';
 
 import { WeatherEffects } from './weather.effects';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideMockActions } from '@ngrx/effects/testing';
 
 describe('WeatherEffects', () => {
   let actions$: Observable<any>;

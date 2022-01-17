@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
 import { MessageEffects } from './message.effects';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ToastrModule } from 'ngx-toastr';
+import { provideMockActions } from '@ngrx/effects/testing';
 
 describe('MessageEffects', () => {
   let actions$: Observable<any>;
