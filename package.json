@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js -c=./jest.config.js --no-cache",
     "prepare": "husky install",
-    "deploy": "ngh --dir dist/WeatherForecast --no-silent --repo=https://github.com/blazekv/ng-certification.git"
+    "deploy": "ngh --dir dist/WeatherForecast --no-silent --repo=https://github.com/blazekv/ng-certification.git && echo Deployed to https://blazekv.github.io/ng-certification/"
   },
   "private": true,
   "dependencies": {
