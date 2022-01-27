@@ -12,22 +12,17 @@
       [items]="countries"
     ></app-autocomplete>
 
-    <app-working-button
-      [state$]="addingState$"
-      [initButton]="initButton"
-      [processingButton]="processingButton"
-      [successButton]="successButton"
-    >
-      <ng-template #initButton>
+    <app-working-button [state$]="addingState$">
+      <ng-template initButton>
         <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">
           <mat-icon aria-hidden="false" aria-label="Example home icon">add</mat-icon>
           Add location
         </button>
       </ng-template>
-      <ng-template #processingButton>
+      <ng-template processingButton>
         <button [disabled]="true" mat-raised-button color="primary">Adding...</button>
       </ng-template>
-      <ng-template #successButton>
+      <ng-template doneButton>
         <button mat-raised-button color="success">
           <mat-icon aria-hidden="false" aria-label="Example home icon">check</mat-icon>
           Done

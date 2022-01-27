@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   Input,
   OnInit,
   TemplateRef,
@@ -10,6 +11,12 @@ import { Observable } from 'rxjs';
 import { ButtonState } from '../../model/button-state';
 import { delay, endWith, filter, tap } from 'rxjs/operators';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import {
+  DoneButtonDirective,
+  ErrorButtonDirective,
+  InitButtonDirective,
+  ProcessingButtonDirective,
+} from './working-button.directive';
 
 @UntilDestroy()
 @Component({
@@ -19,10 +26,14 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkingButtonComponent implements OnInit {
-  @Input() initButton?: TemplateRef<any>;
-  @Input() processingButton?: TemplateRef<any>;
-  @Input() successButton?: TemplateRef<any>;
-  @Input() errorButton?: TemplateRef<any>;
+  @ContentChild(InitButtonDirective, { read: TemplateRef })
+  initButton?: TemplateRef<any>;
+  @ContentChild(ProcessingButtonDirective, { read: TemplateRef })
+  processingButton?: TemplateRef<any>;
+  @ContentChild(DoneButtonDirective, { read: TemplateRef })
+  doneButton?: TemplateRef<any>;
+  @ContentChild(ErrorButtonDirective, { read: TemplateRef })
+  errorButton?: TemplateRef<any>;
 
   @Input()
   set state$(state$: Observable<ButtonState> | undefined) {
